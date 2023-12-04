@@ -699,65 +699,6 @@
 </div>                    </div>
     </div>
 </div>
-<div class="text-center mx-auto">
-    <button id="load-more" class="btn btn-primary mb-5">Load more</button>
-</div>
- 
-<script type="text/javascript">
-    var last_offset = 0;
-    var load_amount = 12;
-    document.addEventListener("DOMContentLoaded", function(event) {
-        $('#load-more').click(()=>{
-            fetch_games(load_amount, 'random');
-        });
-        function fetch_games(amount, sort_by) {
-            $.ajax({
-                url: "/includes/fetch.php",
-                type: 'POST',
-                dataType: 'json',
-                data: {amount: amount, offset: last_offset, sort_by: sort_by},
-                complete: function (data) {
-                    append_content(JSON.parse(data.responseText));
-                }
-            });
-        }
-        function append_content(data){
-            last_offset += data.length;
-            data.forEach((game)=>{
-                let html = '<div class="col-md-2 col-sm-3 col-4 item-grid">';
-                html += '<a href="/game/'+game['slug']+'">';
-                html += '<div class="list-game">';
-                html += '<div class="list-thumbnail"><img src="'+game['thumb_2']+'" class="small-thumb" alt="'+game['title']+'"></div>';
-                html += '<div class="list-content">';
-                html += '<div class="list-title">'+game['title']+'</div>';
-                html += '</div></div></a>';
-                html += '</div>';
-                $("#game-list").append(html);
-            });
-            if(data.length < load_amount){
-                $('#load-more').hide();
-            }
-        }
-    })
-</script>
- 
-			</div>
-	<div class="mb-4 mt-4 hp-bottom-container">
-			</div>
-</div>
-	<footer class="footer text-center">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-4 mb-5 mb-lg-0">
-									</div>
-				<div class="col-lg-4 mb-5 mb-lg-0">
-									</div>
-				<div class="col-lg-4">
-									</div>
-			</div>
-		</div>
-	</footer>
-	
-
+		
 	
 </html>
